@@ -121,6 +121,7 @@ public class EmployeeRepository {
 		employee.setLast_name(resultSet.getString("last_name"));
 		employee.setBirth_date(resultSet.getDate("birth_date"));
 		employee.setHire_date(resultSet.getDate("hire_date"));
+		employee.setGender(resultSet.getInt("gender")==0?"M":"F");
 		return employee;
 	}
 
