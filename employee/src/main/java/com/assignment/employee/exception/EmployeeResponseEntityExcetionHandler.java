@@ -28,7 +28,7 @@ public class EmployeeResponseEntityExcetionHandler extends ResponseEntityExcepti
 	@ExceptionHandler(EmployeeGenericException.class )
 	protected ResponseEntity<EmployeeExceptionResponse> handleEmployeeGenericException(EmployeeGenericException ex, WebRequest request) {
 		EmployeeExceptionResponse employeeExceptionResponse=new EmployeeExceptionResponse(new Date(),
-				ex.getMessage(), request.getDescription(true));
+				ex.getMessage(), request.getDescription(false));
 		return new ResponseEntity<EmployeeExceptionResponse>(employeeExceptionResponse,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
