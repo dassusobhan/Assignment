@@ -1,9 +1,10 @@
 package com.assignment.employee.controller;
 
-import java.util.Date;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ public class EmployeeController {
 	
 	
 	
-	@GetMapping("/employees/dept/{deptNo}")
+	@GetMapping(value="/employees/dept/{deptNo}",produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<EmployeeModel>> getAllEmployeesByDeptNo(@PathVariable("deptNo") String deptNo){
 		List<EmployeeModel> employees= service.getAllEmployeesByDeptNo(deptNo);
 		return ResponseEntity.ok(employees);
@@ -31,15 +32,15 @@ public class EmployeeController {
 	
 	
 	
-	@GetMapping("/employees/hiredate/{hiredate}/salary/{salary}")
-	public ResponseEntity<List<Employee>> getEmployeesFromHiredafterDateAndsalary(@PathVariable("salary") Integer vSalary,@PathVariable("hiredate") String hire_date) {
-		List<Employee> employees=service.getEmployeesFromHiredafterDateAndsalary(vSalary, hire_date);
+	@GetMapping(value="/employees/hiredate/{somedate}/salary/{salary}",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Employee>> getEmployeesFromHiredafterDateAndsalary(@PathVariable("salary") Integer vSalary,@PathVariable("somedate") String date) {
+		List<Employee> employees=service.getEmployeesFromHiredafterDateAndsalary(vSalary, date);
 		return ResponseEntity.ok(employees);
 	}
 
-    @DeleteMapping("employees/salaries/employee/hiredate/{hiredate}")
-	public ResponseEntity<?> deleteEmployeeOnHireDate(@PathVariable("hiredate") String hireDate) {
-		service.deleteEmployeeOnHireDate(hireDate);
+        @DeleteMapping(value="employees/salaries/employee/hiredate/{somedate}")
+	public ResponseEntity<?> deleteEmployeeOnHireDate(@PathVariable("somedate") String date) {
+		service.deleteEmployeeOnHireDate(date);
 		
 		return ResponseEntity.noContent().build();
 	}
