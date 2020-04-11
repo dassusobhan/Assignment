@@ -32,8 +32,9 @@ public class EmployeeRepository {
 
 	public List<EmployeeModel> getAllEmployeesByDeptNo(String deptNo) {
 
-		String query = "SELECT * FROM EMPLOYEES E WHERE E.EMP_NO IN(SELECT DE.EMP_NO FROM DEPT_EMP DE WHERE DE.DEPT_NO=:DEPTNO)";
+		//String query = "SELECT * FROM EMPLOYEES E WHERE E.EMP_NO IN(SELECT DE.EMP_NO FROM DEPT_EMP DE WHERE DE.DEPT_NO=:DEPTNO)";
 
+		String query = "SELECT E.EMP_NO,E.FIRST_NAME,E.LAST_NAME,E.BIRTH_DATE FROM EMPLOYEES E WHERE E.EMP_NO IN(SELECT DE.EMP_NO FROM DEPT_EMP DE WHERE DE.DEPT_NO=:DEPTNO)";
 		
 		
 		List<EmployeeModel> employees = new ArrayList<>();
