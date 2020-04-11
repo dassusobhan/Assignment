@@ -62,15 +62,15 @@ public class EmployeeRepository {
 
 	
 	
-	public List<Employee> getEmployeesFromHiredafterDateAndsalary(Integer vSalary, String hire_date) {
+	public List<Employee> getEmployeesFromHiredafterDateAndsalary(Integer vSalary, String date) {
 
-		String query = "SELECT * FROM EMPLOYEES E WHERE E.HIRE_DATE>TO_DATE(:HIREDATE,:DATEFORMATE) AND E.EMP_NO IN(SELECT S.EMP_NO FROM SALARIES S WHERE S.SALARY>= :VSALARY)";
+		String query = "SELECT * FROM EMPLOYEES E WHERE E.HIRE_DATE>TO_DATE(:SOMEDATE,:DATEFORMATE) AND E.EMP_NO IN(SELECT S.EMP_NO FROM SALARIES S WHERE S.SALARY>= :VSALARY)";
 
 		List<Employee> employees = new ArrayList<>();
 
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
 		parameters.addValue("VSALARY", vSalary);
-		parameters.addValue("HIREDATE", hire_date);
+		parameters.addValue("SOMEDATE", date);
 		parameters.addValue("DATEFORMATE", DATE_FORMAT);
 
 		try {
@@ -93,11 +93,11 @@ public class EmployeeRepository {
 
 	
 	
-	public void deleteEmployeeOnHireDate(String hireDate) {
+	public void deleteEmployeeOnHireDate(String date) {
 
-		String sql = "DELETE FROM SALARIES WHERE EMP_NO IN(SELECT EMP_NO FROM EMPLOYEES WHERE HIRE_DATE<TO_DATE(:HIREDATE,:DATEFORMATE))";
+		String sql = "DELETE FROM SALARIES WHERE EMP_NO IN(SELECT EMP_NO FROM EMPLOYEES WHERE HIRE_DATE<TO_DATE(:SOMEDATE,:DATEFORMATE))";
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
-		parameters.addValue("HIREDATE", hireDate);
+		parameters.addValue("SOMEDATE", date);
 		parameters.addValue("DATEFORMATE", DATE_FORMAT);
 		
 		try {
