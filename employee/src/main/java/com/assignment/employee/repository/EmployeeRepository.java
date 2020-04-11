@@ -39,7 +39,7 @@ public class EmployeeRepository {
 		List<EmployeeModel> employees = new ArrayList<>();
 
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
-		parameters.addValue("deptNo", deptNo);
+		parameters.addValue("DEPTNO", deptNo);
 
 		try {
 		
@@ -69,9 +69,9 @@ public class EmployeeRepository {
 		List<Employee> employees = new ArrayList<>();
 
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
-		parameters.addValue("vSalary", vSalary);
-		parameters.addValue("hireDate", hire_date);
-		parameters.addValue("dateformate", DATE_FORMAT);
+		parameters.addValue("VSALARY", vSalary);
+		parameters.addValue("HIREDATE", hire_date);
+		parameters.addValue("DATEFORMATE", DATE_FORMAT);
 
 		try {
 		
@@ -97,8 +97,8 @@ public class EmployeeRepository {
 
 		String sql = "DELETE FROM SALARIES WHERE EMP_NO IN(SELECT EMP_NO FROM EMPLOYEES WHERE HIRE_DATE<TO_DATE(:HIREDATE,:DATEFORMATE))";
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
-		parameters.addValue("hireDate", hireDate);
-		parameters.addValue("dateformate", DATE_FORMAT);
+		parameters.addValue("HIREDATE", hireDate);
+		parameters.addValue("DATEFORMATE", DATE_FORMAT);
 		
 		try {
 		int count = jdbcTemplate.update(sql, parameters);
