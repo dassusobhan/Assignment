@@ -32,9 +32,8 @@ public class EmployeeRepository {
 
 	public List<EmployeeModel> getAllEmployeesByDeptNo(String deptNo) {
 
-		//String query = "SELECT * FROM EMPLOYEES E WHERE E.EMP_NO IN(SELECT DE.EMP_NO FROM DEPT_EMP DE WHERE DE.DEPT_NO=:DEPTNO)";
-
 		String query = "SELECT E.EMP_NO,E.FIRST_NAME,E.LAST_NAME,E.BIRTH_DATE FROM EMPLOYEES E WHERE E.EMP_NO IN(SELECT DE.EMP_NO FROM DEPT_EMP DE WHERE DE.DEPT_NO=:DEPTNO)";
+
 		
 		
 		List<EmployeeModel> employees = new ArrayList<>();
@@ -44,14 +43,18 @@ public class EmployeeRepository {
 
 		try {
 		
-		employees = jdbcTemplate.query(query, parameters, new RowMapper<EmployeeModel>() {
-			@Override
-			public EmployeeModel mapRow(ResultSet resultSet, int i) throws SQLException {
-				return toEmployeeModel(resultSet);
-			}
+			/*
+			 * employees = jdbcTemplate.query(query, parameters, new
+			 * RowMapper<EmployeeModel>() {
+			 * 
+			 * @Override public EmployeeModel mapRow(ResultSet resultSet, int i) throws
+			 * SQLException { return toEmployeeModel(resultSet); }
+			 * 
+			 * 
+			 * });
+			 */
+			employees = jdbcTemplate.query(query, parameters, (resultSet,i)->toEmployeeModel(resultSet));
 			
-		
-		});
 		}
 		catch (Exception e) {
 			throw new EmployeeGenericException(e.getMessage());
@@ -76,13 +79,19 @@ public class EmployeeRepository {
 
 		try {
 		
-		employees = jdbcTemplate.query(query, parameters, new RowMapper<Employee>() {
-
-			@Override
-			public Employee mapRow(ResultSet resultSet, int i) throws SQLException {
-				return toEmployee(resultSet);
-			}
-		});
+			/*
+			 * employees = jdbcTemplate.query(query, parameters, new RowMapper<Employee>() {
+			 * 
+			 * @Override public Employee mapRow(ResultSet resultSet, int i) throws
+			 * SQLException { return toEmployee(resultSet); } });
+			 */
+			
+			
+			  employees = jdbcTemplate.query(query, parameters,
+			  (resultSet,i)->toEmployee(resultSet));
+			 
+			
+			
 		}
 		catch (Exception e) {
 			throw new EmployeeGenericException(e.getMessage());
