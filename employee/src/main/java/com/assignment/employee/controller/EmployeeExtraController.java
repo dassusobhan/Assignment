@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.assignment.employee.extra.ExtraProperty;
+import com.assignment.employee.ExtraProperty;
 import com.assignment.employee.models.Employee;
 import com.assignment.employee.models.EmployeeModel;
 import com.assignment.employee.service.EmployeeService;
