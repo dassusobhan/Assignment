@@ -1,4 +1,4 @@
-package com.assignment.employee.extra;
+package com.assignment.employee;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
